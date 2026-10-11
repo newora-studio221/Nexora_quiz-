@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#070d26">
+<title>NEXORA QUIZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070d26;--g1:#17317f;--c:rgba(255,255,255,.07);--b:rgba(255,255,255,.13);--t:#fff;--m:#9fb0d9;--bl:#2f6bff;--cy:#22d3ee;--vi:#7c4dff;--gr:#22c55e;--ye:#ffc83d;--rd:#ef4444;--mb:#0f1a45;--nv:rgba(7,13,38,.94)}
+body.lt{--bg:#eaf0ff;--g1:#bcd0ff;--c:rgba(20,40,120,.07);--b:rgba(20,40,120,.16);--t:#0b1640;--m:#4a5c92;--mb:#fff;--nv:rgba(255,255,255,.95)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#03061a;color:var(--t);font:600 15px/1.35 Nunito,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+#app{position:relative;max-width:480px;height:100dvh;margin:auto;background:radial-gradient(120% 55% at 50% 0,var(--g1) 0,var(--bg) 65%);overflow:hidden}
+#v{height:100%;overflow-y:auto;overflow-x:hidden;padding:14px 16px 100px}
+.pg{animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateX(16px)}}
+nav{position:absolute;bottom:0;left:0;right:0;display:flex;background:var(--nv);backdrop-filter:blur(12px);border-top:1px solid var(--b);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav button{flex:1;background:none;border:0;color:var(--m);font-size:11px;font-weight:700;min-height:48px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .15s}
+nav button:active{transform:scale(.9)}nav button.on{color:var(--ye);font-weight:900}nav i{font-style:normal;font-size:21px}
+.bt{display:block;width:100%;min-height:54px;border:0;border-radius:18px;font-weight:900;font-size:17px;color:#fff;background:linear-gradient(135deg,var(--bl),var(--vi));box-shadow:0 8px 20px rgba(47,107,255,.35);transition:transform .15s;margin:12px 0}
+.bt:active{transform:scale(.96)}.bt.y{background:linear-gradient(180deg,#ffd34f,#f5a623);color:#2a1a00;box-shadow:0 8px 22px rgba(245,166,35,.4);font-size:20px}
+.bt.gn{background:linear-gradient(180deg,#2bd96b,#16a34a);box-shadow:0 8px 20px rgba(34,197,94,.35)}.bt.gh{background:var(--c);border:1.5px solid var(--bl);box-shadow:none;color:var(--t)}
+.cd{background:var(--c);border:1px solid var(--b);border-radius:22px;padding:14px;backdrop-filter:blur(8px);margin-bottom:12px}
+.lgw{text-align:center;padding:4px 0 10px}.lg{width:74px;height:82px;filter:drop-shadow(0 0 14px rgba(34,211,238,.5))}
+.nx{font-size:42px;font-weight:900;letter-spacing:2px;line-height:1;color:#fff;text-shadow:0 4px 18px rgba(47,107,255,.6)}body.lt .nx{color:#0b1640}
+.qz{font-size:30px;font-weight:900;letter-spacing:6px;color:var(--ye);line-height:1.1}.sub{color:var(--m);margin-top:4px}
+.pf{display:flex;gap:12px;align-items:center}.av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--vi),var(--cy));display:grid;place-items:center;font-size:30px;flex:none;border:2px solid var(--ye)}.av.big{width:76px;height:76px;font-size:42px}
+.fl{flex:1;min-width:0}.fl b{display:block;font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}small{color:var(--m);font-size:12px;font-weight:700;display:block}
+.lvb{display:inline-block;background:rgba(47,107,255,.35);border-radius:10px;padding:1px 8px;font-size:12px;font-weight:800;margin:2px 0}
+.bar{height:9px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden;margin:4px 0}body.lt .bar{background:rgba(20,40,120,.15)}.bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--cy),var(--bl));transition:width .9s cubic-bezier(.3,.8,.3,1)}.bar.s{height:5px;background:rgba(255,255,255,.3)}.bar.s i{background:#fff}.bar.g i{background:linear-gradient(90deg,#22c55e,#86efac)}
+.rt{text-align:center;font-size:13px;border-left:1px solid var(--b);padding-left:10px}.rt div{margin:2px 0}.rt b{display:inline;font-size:16px}
+.dc{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#5b3df0,#7c4dff 60%,#3d6bff);border-radius:20px;padding:14px;margin-bottom:14px;font-size:24px;box-shadow:0 8px 22px rgba(124,77,255,.4);cursor:pointer;transition:transform .15s}.dc:active{transform:scale(.97)}.dc div{flex:1;font-size:15px}.dc b{display:block;font-size:17px}.dc small{color:#e0d8ff}
+.sh{display:flex;justify-content:space-between;align-items:center;margin:6px 0 8px}.sh b{font-size:17px}.sh a{color:var(--cy);font-size:13px;font-weight:800;padding:8px;cursor:pointer}
+.pop{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px}.pt{background:none;border:0;color:var(--t);font-weight:800;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:5px;transition:transform .15s}.pt:active{transform:scale(.92)}.pt small{color:var(--t);text-align:center}
+.ic{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:27px;flex:none}.pt .ic{box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.pm{display:flex;justify-content:space-between;align-items:center;font-weight:800;border-color:rgba(255,200,61,.5);cursor:pointer}
+.ad{border:1.5px dashed var(--m);border-radius:14px;text-align:center;padding:14px 8px;color:var(--m);font-weight:800;font-size:12px;margin:10px 0}.ad small{margin-top:4px}
+.ttl{font-size:24px;font-weight:900;margin:2px 0 14px}.hd{display:flex;align-items:center;gap:12px;margin-bottom:14px}.hd h3{font-size:21px;font-weight:900}
+.ib{width:44px;height:44px;border-radius:14px;border:1px solid var(--b);background:var(--c);color:var(--t);font-size:18px;flex:none}
+.cr{display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:20px;margin-bottom:10px;background:linear-gradient(90deg,var(--a),var(--z));color:#fff;min-height:68px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .15s}.cr:active{transform:scale(.97)}.cr small{color:#fff;opacity:.9}.cr span{font-size:24px}.cr b{font-size:17px}
+.hero{width:90px;height:90px;border-radius:28px;display:grid;place-items:center;font-size:48px;margin:0 auto 10px;background:linear-gradient(135deg,var(--a),var(--z));box-shadow:0 10px 26px rgba(0,0,0,.35)}
+h4{margin:14px 0 8px;font-size:16px}.chs{display:flex;gap:8px}.ch{flex:1;min-height:48px;border-radius:15px;border:1.5px solid var(--b);background:var(--c);color:var(--t);font-weight:800;font-size:14px;transition:.2s}.ch.on{background:linear-gradient(135deg,var(--bl),var(--vi));border-color:transparent;color:#fff;transform:scale(1.04)}
+.qt{display:flex;align-items:center;gap:10px;margin-bottom:10px}.qt b{flex:1;font-size:17px}.hp{background:rgba(239,68,68,.2);border:1px solid var(--rd);border-radius:14px;padding:6px 12px;font-weight:900}
+.chip{display:inline-block;margin:12px 0 6px;padding:5px 12px;border-radius:14px;background:rgba(34,211,238,.15);border:1px solid var(--cy);color:var(--cy);font-size:13px;font-weight:800}
+.qq{font-size:23px;line-height:1.25;margin:6px 0 16px;font-weight:900;animation:in .4s}
+.an{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 14px;margin-bottom:10px;border-radius:18px;background:var(--c);border:1.5px solid var(--b);color:var(--t);font-weight:800;font-size:16px;text-align:left;transition:transform .15s;animation:in .4s backwards}.an:nth-child(2){animation-delay:.05s}.an:nth-child(3){animation-delay:.1s}.an:nth-child(4){animation-delay:.15s}
+.an:active{transform:scale(.97)}.an b{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(127,150,230,.3);font-size:15px}
+.an.ok{background:linear-gradient(90deg,#16a34a,#22c55e);border-color:#4ade80;color:#fff;animation:pop .45s}.an.ko{background:linear-gradient(90deg,#b91c1c,#ef4444);border-color:#f87171;color:#fff;animation:shk .4s}.an.off{opacity:.18;pointer-events:none}.lk .an{pointer-events:none}
+@keyframes pop{50%{transform:scale(1.04)}}@keyframes shk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.ft{display:flex;gap:10px}.ft .bt{margin:6px 0;min-height:50px;font-size:15px}
+.fb{border-radius:20px;padding:14px;margin:4px 0;animation:in .35s}.fb.g{background:rgba(34,197,94,.15);border:1.5px solid var(--gr)}.fb.r{background:rgba(239,68,68,.15);border:1.5px solid var(--rd)}.fh{display:flex;justify-content:space-between;align-items:center;font-size:19px;font-weight:900;margin-bottom:4px}.xpb{background:rgba(255,200,61,.2);color:var(--ye);border-radius:12px;padding:3px 10px;font-size:15px}.ex{margin-top:6px;color:var(--m)}
+.rec{background:linear-gradient(90deg,#f5a623,#ffd34f);color:#2a1a00;font-weight:900;border-radius:16px;padding:10px;text-align:center;margin-bottom:8px;animation:pop .8s infinite}
+.res{text-align:center}.trophy{font-size:64px;animation:pop 1.2s infinite}.ring{position:relative;width:150px;height:150px;margin:8px auto}.ring svg{transform:rotate(-90deg)}.rb{fill:none;stroke:var(--b);stroke-width:10}.rf{fill:none;stroke:var(--gr);stroke-width:10;stroke-linecap:round;stroke-dasharray:0 327;transition:stroke-dasharray 1.2s}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:36px;font-weight:900}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.g3 .cd{padding:10px 4px;margin:0}.g3 b{display:block;font-size:17px}.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.g4 .cd{text-align:center;margin:0}.g4 b{font-size:24px;display:block}
+.pr{display:flex;gap:14px;align-items:center;margin:4px 0 16px}.pr h2{font-size:22px;display:flex;align-items:center;gap:8px}.pr .ib{width:36px;height:36px;font-size:14px}
+.bgs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.bg{text-align:center;font-size:11px;font-weight:800;line-height:1.15}.bg i{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 4px;border-radius:50%;font-style:normal;font-size:26px;background:linear-gradient(135deg,#f5a623,#ffd34f);box-shadow:0 4px 12px rgba(245,166,35,.4)}.bg.lc{opacity:.45}.bg.lc i{background:var(--c);filter:grayscale(1);box-shadow:none}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.sr div{text-align:center;padding:8px 2px;border-radius:14px;border:1px solid var(--b);background:var(--c);font-size:12px;font-weight:800}.sr .dn{border-color:var(--gr);background:rgba(34,197,94,.15)}
+.ml{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:8px 14px;margin-bottom:8px;border-radius:16px;background:var(--c);border:1px solid var(--b);color:var(--t);font-weight:800;font-size:15px;text-align:left}.ml span{flex:1}.ml em{font-style:normal;color:var(--m)}
+.sw{width:48px;height:28px;border-radius:14px;background:#475577;position:relative;transition:.2s;flex:none}.sw:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--gr)}.sw.on:after{left:23px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tabs .ch{min-height:42px}.tabs .ch.on{background:linear-gradient(180deg,#ffd34f,#f5a623);color:#2a1a00;transform:none}
+.pod{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:6px 0 14px}.pod>div{flex:1;text-align:center;border-radius:20px 20px 0 0;padding:10px 4px;background:var(--c);border:1px solid var(--b)}.pod .p1{background:linear-gradient(180deg,#f5a623,#c97a0a);color:#fff;padding-bottom:22px}.pod .av{margin:0 auto 4px;width:50px;height:50px}.pod b{display:block;font-size:14px}.pod small{color:inherit;opacity:.85}.pod .me{outline:2px solid var(--ye)}
+.row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;margin-bottom:6px;background:var(--c);font-weight:800}.row.me{background:linear-gradient(90deg,#ffd34f,#f5a623);color:#2a1a00}.row .n{width:22px;text-align:center}.row .av{width:34px;height:34px;font-size:19px;border-width:1px}.row span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl{display:flex;justify-content:space-between;gap:10px}.pl>div{flex:1;text-align:center;border-radius:18px;padding:14px 6px;background:var(--c);border:2px solid var(--b);font-weight:900}.pl small{margin-top:2px}
+#md{position:absolute;inset:0;background:rgba(0,0,0,.65);display:none;align-items:flex-end;z-index:50}#md.on{display:flex}.mb{width:100%;max-height:88%;overflow:auto;background:var(--mb);border-radius:26px 26px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));animation:up .3s}@keyframes up{from{transform:translateY(60px);opacity:0}}.mb h3{margin-bottom:10px;font-size:20px}.mb p{margin-bottom:8px;color:var(--m)}.mb input{width:100%;min-height:48px;border-radius:14px;border:1.5px solid var(--b);background:var(--c);color:var(--t);padding:0 14px;font:inherit;font-weight:800;font-size:16px;margin-bottom:10px}
+.avs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px}.avs button{height:56px;font-size:30px;border-radius:16px;border:2px solid var(--b);background:var(--c)}.avs .on{border-color:var(--ye);background:rgba(255,200,61,.2)}
+.rv{border-bottom:1px solid var(--b);padding:8px 0;font-size:14px}.rv b{display:block}
+#ts{position:absolute;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:#111b45;color:#fff;border:1px solid var(--b);border-radius:16px;padding:10px 16px;font-weight:800;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:60;max-width:90%;text-align:center}#ts.on{opacity:1;transform:translateX(-50%)}
+.cf{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;animation:cf 1.6s ease-in forwards;z-index:70;pointer-events:none}@keyframes cf{to{transform:translate(var(--x),105vh) rotate(720deg);opacity:.2}}
+.fx{position:absolute;left:50%;top:42%;margin-left:-60px;width:120px;text-align:center;font-weight:900;font-size:30px;color:var(--ye);animation:fl 1s forwards;z-index:40;pointer-events:none;text-shadow:0 2px 10px #000}@keyframes fl{to{transform:translateY(-90px);opacity:0}}
+.prm{text-align:center}.prm .cr{justify-content:space-between}.vl{list-style:none;text-align:left}.vl li{padding:9px 0;font-weight:800}.vl li:before{content:"✓";display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gr);margin-right:10px;font-size:13px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:340px){.nx{font-size:34px}.qq{font-size:20px}.pop{gap:4px}}
+</style>
+</head>
+<body>
+<div id="app"><div id="v"></div><nav id="nv"></nav><div id="md" onclick="if(event.target==this)closeM()"></div><div id="ts"></div></div>
+<script>
+const RAW=`cg|e|Combien de continents compte la Terre (modèle courant) ?|7|5|6|8|On compte généralement 7 continents.
+cg|e|Quelle est la capitale de la France ?|Paris|Lyon|Marseille|Nice|Paris est la capitale de la France.
+cg|e|Quel est le plus grand océan ?|Pacifique|Atlantique|Indien|Arctique|Le Pacifique couvre environ un tiers du globe.
+cg|e|Combien de jours compte une année non bissextile ?|365|364|366|360|Une année non bissextile a 365 jours.
+cg|m|Quel est le plus long fleuve d'Afrique ?|Le Nil|Le Congo|Le Niger|Le Zambèze|Le Nil mesure environ 6 650 km.
+cg|m|Quelle est la capitale du Japon ?|Tokyo|Kyoto|Osaka|Séoul|Tokyo est la capitale du Japon.
+cg|m|Qui a peint la Joconde ?|Léonard de Vinci|Michel-Ange|Picasso|Van Gogh|Léonard de Vinci l'a peinte vers 1503.
+cg|d|Quel est le plus petit pays du monde ?|Vatican|Monaco|Saint-Marin|Malte|Le Vatican fait environ 0,44 km².
+cg|d|Quelle est la capitale de l'Australie ?|Canberra|Sydney|Melbourne|Perth|Canberra, et non Sydney, est la capitale.
+sn|e|Quelle est la capitale du Sénégal ?|Dakar|Thiès|Saint-Louis|Kaolack|Dakar est située sur la presqu'île du Cap-Vert.
+sn|e|Quelle est la langue officielle du Sénégal ?|Français|Anglais|Wolof|Arabe|Le français est la langue officielle ; le wolof est très parlé.
+sn|e|Quel fleuve borde le nord du Sénégal ?|Le fleuve Sénégal|Le Niger|Le Congo|La Gambie|Il marque la frontière avec la Mauritanie.
+sn|m|En quelle année le Sénégal est-il devenu indépendant ?|1960|1957|1964|1975|L'indépendance date du 4 avril 1960.
+sn|m|Qui fut le premier président du Sénégal ?|Léopold Sédar Senghor|Abdou Diouf|Abdoulaye Wade|Macky Sall|Senghor a dirigé le pays de 1960 à 1980.
+sn|m|Comment s'appelle le célèbre lac rose du Sénégal ?|Lac Retba|Lac de Guiers|Lac Tchad|Lac Victoria|Le lac Retba doit sa couleur à des algues.
+sn|m|Quelle île sénégalaise est classée à l'UNESCO et liée à la traite négrière ?|Gorée|Carabane|Saloum|Ngor|La Maison des Esclaves se trouve à Gorée.
+sn|d|Quelle est la monnaie utilisée au Sénégal ?|Franc CFA|Dirham|Naira|Cedi|Le franc CFA (XOF) est utilisé.
+sn|d|Quelle ville fut capitale de l'AOF avant Dakar ?|Saint-Louis|Ziguinchor|Touba|Kolda|Saint-Louis fut capitale jusqu'en 1902.
+sn|d|Quelle région est située au sud de la Gambie ?|Casamance|Diourbel|Fatick|Matam|La Casamance est au sud de la Gambie.
+af|e|Quel est le plus grand pays d'Afrique par superficie ?|Algérie|Nigeria|Égypte|RD Congo|L'Algérie est le plus vaste depuis 2011.
+af|e|Quel désert couvre le nord de l'Afrique ?|Sahara|Kalahari|Gobi|Namib|Le Sahara est le plus grand désert chaud.
+af|m|Quelle est la capitale du Nigeria ?|Abuja|Lagos|Kano|Ibadan|Abuja est la capitale depuis 1991.
+af|m|Quel est le pays le plus peuplé d'Afrique ?|Nigeria|Éthiopie|Égypte|Afrique du Sud|Le Nigeria compte plus de 200 millions d'habitants.
+af|m|Quelle montagne est la plus haute d'Afrique ?|Kilimandjaro|Mont Kenya|Mont Cameroun|Atlas|Il culmine à 5 895 m en Tanzanie.
+af|m|Quelle est la capitale du Maroc ?|Rabat|Casablanca|Marrakech|Fès|Rabat est la capitale, Casablanca la plus grande ville.
+af|d|Quel lac est le plus grand d'Afrique ?|Lac Victoria|Lac Tchad|Lac Tanganyika|Lac Malawi|Le lac Victoria couvre environ 68 000 km².
+af|d|Quel pays africain a vaincu l'Italie à Adwa en 1896 ?|Éthiopie|Ghana|Kenya|Mali|L'Éthiopie a préservé son indépendance.
+af|d|Qui fut le premier président noir d'Afrique du Sud ?|Nelson Mandela|Thabo Mbeki|Desmond Tutu|Jacob Zuma|Élu en 1994 après la fin de l'apartheid.
+hi|e|En quelle année a commencé la Révolution française ?|1789|1492|1815|1914|Elle débute avec la prise de la Bastille.
+hi|e|Qui fut le premier homme sur la Lune ?|Neil Armstrong|Buzz Aldrin|Youri Gagarine|John Glenn|C'était en juillet 1969 (Apollo 11).
+hi|m|En quelle année a débuté la Première Guerre mondiale ?|1914|1905|1918|1939|Elle dure de 1914 à 1918.
+hi|m|Quel empire africain était dirigé par Mansa Moussa ?|Empire du Mali|Empire du Ghana|Empire Songhaï|Empire du Kanem|Mansa Moussa est célèbre pour son pèlerinage en 1324.
+hi|m|Qui a atteint l'Amérique en 1492 ?|Christophe Colomb|Vasco de Gama|Magellan|Marco Polo|Colomb accosta aux Bahamas en 1492.
+hi|m|Quelle civilisation a construit les pyramides de Gizeh ?|Les Égyptiens|Les Romains|Les Grecs|Les Mayas|Elles datent de l'Ancien Empire égyptien.
+hi|d|En quelle année est tombé le mur de Berlin ?|1989|1961|1991|1975|Le mur est tombé le 9 novembre 1989.
+hi|d|Qui dirigeait l'empire Songhaï à son apogée ?|Askia Mohammed|Soundiata Keïta|Samori Touré|Chaka|Askia Mohammed régna de 1493 à 1528.
+hi|d|Quelle bataille a mis fin à l'empire de Napoléon en 1815 ?|Waterloo|Austerlitz|Verdun|Trafalgar|Waterloo se situe en Belgique.
+sc|e|Quel gaz respirons-nous principalement pour vivre ?|Oxygène|Azote|Hydrogène|Hélium|Nous respirons de l'oxygène (21 % de l'air).
+sc|e|Quelle est la formule de l'eau ?|H2O|CO2|O2|NaCl|Deux atomes d'hydrogène et un d'oxygène.
+sc|e|Combien de planètes compte le système solaire ?|8|7|9|10|Depuis 2006, Pluton est une planète naine.
+sc|m|Quel organe pompe le sang dans le corps ?|Le cœur|Le foie|Les poumons|Le rein|Le cœur assure la circulation du sang.
+sc|m|Quelle est la vitesse approximative de la lumière ?|300 000 km/s|30 000 km/s|3 000 km/s|3 000 000 km/s|Environ 299 792 km/s dans le vide.
+sc|m|Quel est le symbole chimique de l'or ?|Au|Ag|Or|Go|Au vient du latin aurum.
+sc|d|Quel os est le plus long du corps humain ?|Le fémur|Le tibia|L'humérus|Le radius|Le fémur se trouve dans la cuisse.
+sc|d|Quelle particule porte une charge négative ?|L'électron|Le proton|Le neutron|Le photon|Les électrons tournent autour du noyau.
+sc|d|Quel est l'élément le plus abondant dans l'univers ?|Hydrogène|Oxygène|Carbone|Hélium|L'hydrogène forme environ 75 % de la matière ordinaire.
+ma|e|Combien font 7 × 8 ?|56|54|48|64|7 × 8 = 56.
+ma|e|Combien font 15 + 27 ?|42|41|43|32|15 + 27 = 42.
+ma|e|Quel est le double de 35 ?|70|65|75|60|35 × 2 = 70.
+ma|m|Quelle est la racine carrée de 144 ?|12|14|11|13|12 × 12 = 144.
+ma|m|Combien font 25 % de 200 ?|50|25|40|75|200 ÷ 4 = 50.
+ma|m|Quelle est la somme des angles d'un triangle ?|180°|90°|360°|270°|La somme vaut toujours 180°.
+ma|d|Combien font 2 puissance 10 ?|1024|512|2048|1000|2¹⁰ = 1024.
+ma|d|Quelle est la valeur approximative de π ?|3,14|2,71|1,62|3,41|π ≈ 3,14159.
+ma|d|Résous : 3x + 5 = 20. Que vaut x ?|5|4|6|15|3x = 15 donc x = 5.
+fb|e|Combien de joueurs y a-t-il par équipe sur le terrain ?|11|10|9|12|Une équipe compte 11 joueurs, gardien inclus.
+fb|e|Quel pays a organisé la Coupe du monde 2022 ?|Qatar|Russie|Brésil|Allemagne|Elle s'est jouée en novembre-décembre 2022.
+fb|m|Quel pays a remporté la CAN 2021 (jouée en 2022) ?|Sénégal|Égypte|Cameroun|Algérie|Le Sénégal a battu l'Égypte aux tirs au but.
+fb|m|Qui a remporté la Coupe du monde 2018 ?|France|Croatie|Brésil|Allemagne|La France a battu la Croatie 4-2.
+fb|m|Quel joueur a remporté le plus de Ballons d'or ?|Lionel Messi|Cristiano Ronaldo|Michel Platini|Johan Cruyff|Messi en compte huit.
+fb|m|Quel club joue au stade Santiago Bernabéu ?|Real Madrid|FC Barcelone|Atlético Madrid|Valence|C'est le stade du Real Madrid.
+fb|d|Qui a gagné la Coupe du monde 2022 ?|Argentine|France|Croatie|Maroc|L'Argentine a battu la France aux tirs au but.
+fb|d|Quel pays africain a atteint les demi-finales de la Coupe du monde 2022 ?|Maroc|Sénégal|Ghana|Cameroun|Le Maroc fut la première équipe africaine en demi-finale.
+fb|d|Combien de minutes dure un match officiel (hors prolongation) ?|90|80|100|120|Deux mi-temps de 45 minutes.
+fr|e|Quel est le pluriel de « cheval » ?|Chevaux|Chevals|Chevaus|Chevalx|Les mots en -al font souvent -aux.
+fr|e|Quel est le contraire de « grand » ?|Petit|Gros|Long|Haut|Petit est le contraire de grand.
+fr|m|Complète : « Il faut que tu ___ » (venir)|viennes|viens|venir|venais|Après « il faut que » on emploie le subjonctif.
+fr|m|Quelle est la nature du mot « rapidement » ?|Adverbe|Adjectif|Nom|Verbe|Il se termine en -ment et modifie un verbe.
+fr|m|Quel est le féminin de « acteur » ?|Actrice|Acteuse|Acteure|Actrisse|Acteur devient actrice.
+fr|m|Quel auteur a écrit « Les Misérables » ?|Victor Hugo|Zola|Balzac|Molière|Le roman date de 1862.
+fr|d|Quel est le participe passé de « résoudre » ?|Résolu|Résous|Résolvé|Résoulu|On écrit « j'ai résolu ».
+fr|d|Quelle phrase est correcte ?|Les fleurs que j'ai cueillies|Les fleurs que j'ai cueilli|Les fleurs que j'ai cueillis|Les fleurs que j'ai cueillie|Le COD est placé avant le verbe : accord au féminin pluriel.
+fr|d|Un « hiatus » désigne...|Deux voyelles qui se suivent|Une consonne double|Une figure de style|Un accent|Exemples : « géant », « poète ».
+en|e|Comment dit-on « bonjour » en anglais ?|Hello|Goodbye|Thanks|Please|Hello signifie bonjour.
+en|e|Que signifie « apple » ?|Pomme|Poire|Orange|Banane|Apple = pomme.
+en|e|Comment dit-on « merci » en anglais ?|Thank you|Sorry|Welcome|Please|Thank you = merci.
+en|m|Choisis la bonne forme : « She ___ to school every day. »|goes|go|going|gone|Troisième personne du singulier : goes.
+en|m|Quel est le passé de « go » ?|Went|Goed|Gone|Going|Went est le prétérit de go.
+en|m|Que signifie « library » ?|Bibliothèque|Librairie|Bureau|Livre|Faux ami : librairie = bookshop.
+en|d|Choisis le bon mot : « I have lived here ___ 2015. »|since|for|from|at|Since + date, for + durée.
+en|d|Quel est le comparatif de « good » ?|Better|Gooder|More good|Best|Better est irrégulier.
+en|d|Que signifie « actually » ?|En fait|Actuellement|Activement|Souvent|Faux ami : actuellement = currently.
+is|e|Combien de piliers compte l'islam ?|5|4|6|7|Shahada, prière, zakat, jeûne, pèlerinage.
+is|e|Quel est le mois du jeûne en islam ?|Ramadan|Mouharram|Rajab|Chawwal|Le jeûne se fait durant le mois de Ramadan.
+is|e|Combien de prières obligatoires par jour ?|5|3|4|6|Fajr, Dhuhr, Asr, Maghrib et Isha.
+is|m|Vers quelle ville se tournent les musulmans pour prier ?|La Mecque|Médine|Jérusalem|Le Caire|La Kaaba se trouve à La Mecque.
+is|m|Quel est le livre sacré de l'islam ?|Le Coran|La Torah|L'Évangile|Les Psaumes|Le Coran est la parole révélée au Prophète ﷺ.
+is|m|Combien de sourates compte le Coran ?|114|99|120|100|Le Coran compte 114 sourates.
+is|m|Quelle fête marque la fin du Ramadan ?|Aïd al-Fitr|Aïd al-Adha|Mawlid|Achoura|L'Aïd al-Fitr (Korité au Sénégal).
+is|d|Quelle est la première sourate du Coran ?|Al-Fatiha|Al-Baqara|Al-Ikhlas|An-Nas|Al-Fatiha signifie « l'Ouverture ».
+is|d|Quel événement marque le début du calendrier musulman ?|L'Hégire|La naissance du Prophète|La bataille de Badr|La conquête de La Mecque|L'Hégire (622) marque l'an 1.
+jv|e|Quel plombier moustachu est la mascotte de Nintendo ?|Mario|Luigi|Sonic|Link|Mario apparaît dès 1981.
+jv|e|Quel jeu consiste à construire avec des blocs ?|Minecraft|Fortnite|FIFA|Tetris|Minecraft est sorti en 2011.
+jv|m|Quelle société a créé la PlayStation ?|Sony|Microsoft|Nintendo|Sega|La première PlayStation date de 1994.
+jv|m|Dans Pac-Man, que mange-t-on ?|Des pastilles|Des pièces|Des étoiles|Des cerises seulement|Pac-Man mange des pastilles en évitant les fantômes.
+jv|m|Quel héros porte une épée dans « The Legend of Zelda » ?|Link|Zelda|Ganon|Mario|Link est le héros ; Zelda est la princesse.
+jv|m|Quel jeu de bataille royale est sorti en 2017 ?|Fortnite|Tetris|Zelda|Pong|Fortnite a été lancé en 2017.
+jv|d|Quel est le jeu vidéo le plus vendu de tous les temps ?|Minecraft|Tetris|GTA V|Wii Sports|Plus de 300 millions de copies.
+jv|d|En quelle année est sortie la Nintendo Switch ?|2017|2015|2019|2013|Elle est sortie en mars 2017.
+jv|d|Quel animal est Sonic ?|Un hérisson|Un renard|Un lapin|Un écureuil|Sonic est un hérisson bleu de Sega.
+te|e|À quoi sert le Wi-Fi ?|Se connecter sans câble|Imprimer|Éteindre l'écran|Charger la batterie|Il permet de se connecter à Internet sans câble.
+te|e|Quel appareil sert à pointer et cliquer ?|Souris|Clavier|Écran|Imprimante|La souris déplace le curseur.
+te|m|Que signifie « HTML » ?|HyperText Markup Language|High Tech Machine Language|Home Tool Markup Language|Hyper Transfer Mail Link|HTML structure les pages web.
+te|m|Quelle entreprise a racheté Android en 2005 ?|Google|Apple|Microsoft|Nokia|Google a racheté Android Inc. en 2005.
+te|m|Que signifie « USB » ?|Universal Serial Bus|United System Box|Ultra Speed Byte|Universal Storage Base|C'est un standard de connexion.
+te|m|Que signifie « IA » ?|Intelligence artificielle|Information avancée|Internet actif|Interface automatique|L'IA imite certaines capacités humaines.
+te|d|Que signifie « CPU » ?|Processeur|Carte graphique|Mémoire vive|Disque dur|C'est le « cerveau » de l'ordinateur.
+te|d|Combien d'octets y a-t-il dans 1 Kio ?|1024|1000|512|2048|1 Kio = 1024 octets.
+te|d|Quel langage sert à styliser les pages web ?|CSS|SQL|Python|C++|CSS gère couleurs, mise en page et animations.`;
+const QS=RAW.trim().split('\n').map((l,i)=>{const a=l.split('|');return{id:i,c:a[0],d:a[1],q:a[2],o:a.slice(3,7),e:a[7]}});
+const C=[['cg','Culture générale','🌐','#1e6bff','#18b6e8'],['sn','Sénégal','🇸🇳','#0f8a3c','#b8941a'],['af','Afrique','🌍','#e07a10','#f0b429'],['fb','Football','⚽','#14a14a','#1e7f45'],['hi','Histoire','📖','#c26a12','#7a4a22'],['sc','Sciences','🔬','#1e6bff','#16a5c8'],['ma','Mathématiques','➗','#2f6bff','#1a3fa8'],['fr','Français','🇫🇷','#2849c8','#6a3fc2'],['en','Anglais','🇬🇧','#3a3fd0','#8b3fd0'],['is','Culture islamique','🕌','#128a5a','#0e6b4c'],['jv','Jeux vidéo','🎮','#7c4dff','#c03fd0'],['te','Technologie','💻','#0e8fb0','#2f6bff']].map(a=>({id:a[0],n:a[1],i:a[2],a:a[3],z:a[4]}));
+const CM={mix:{id:'mix',n:'Quiz mix',i:'🎲',a:'#7c4dff',z:'#2f6bff'}};C.forEach(c=>CM[c.id]=c);
+const AVS=['🧑🏾','👩🏾','🧔🏿','👧🏽','👨🏾‍🎓','🦁','🦅','🐯'];
+const FK=[['Aïcha',11230,'👩🏾'],['Momo',10450,'🧔🏿'],['Abdou',10120,'🧑🏾'],['Fatou',9820,'👧🏽'],['Younouss',8450,'👨🏾‍🎓'],['Sadio',8120,'🦁'],['Mariama',7230,'👩🏾'],['Cheikh',6980,'🧑🏾'],['Awa',6650,'👧🏽'],['Lamine',5890,'🧔🏿']];
+const CONTACT_EMAIL='support@nexoraquiz.app';
+const T=[0,500,1000,2000,3500,5500,8000,11000,15000,20000],$=id=>document.getElementById(id);
+const th=l=>l<=10?T[l-1]:T[9]+(l-10)*6000,lv=x=>{let l=1;while(th(l+1)<=x)l++;return{l,a:th(l),b:th(l+1)}};
+const ymd=t=>{const d=new Date(t);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()},today=()=>ymd(Date.now());
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const DEF=()=>({name:'Joueur',av:AVS[0],xp:0,coins:20,played:0,best:0,streak:0,last:'',cor:0,perf:0,bd:[],cp:{},hist:[],sr:[],dd:'',set:{snd:1,mus:0,dark:1,not:0}});
+let S=DEF();try{const o=JSON.parse(localStorage.getItem('nexora_quiz'));if(o)S=Object.assign(DEF(),o,{set:Object.assign(DEF().set,o.set)})}catch(e){}
+const save=()=>{try{localStorage.setItem('nexora_quiz',JSON.stringify(S))}catch(e){}};
+const sk=()=>S.last===today()||S.last===ymd(Date.now()-864e5)?S.streak:0;
+const cd=id=>(S.cp[id]||[]).length;
+const B=[['🌱','Débutant',()=>1],['🏅','Premier quiz',()=>S.played>=1],['🔥','Série de 3 jours',()=>S.streak>=3],['🧠','100 bonnes réponses',()=>S.cor>=100],['🏆','Score parfait',()=>S.perf>=1],['🌍','Expert Afrique',()=>cd('af')>=7],['⚽','Expert Football',()=>cd('fb')>=7],['📚','Expert Histoire',()=>cd('hi')>=7],['🔬','Expert Sciences',()=>cd('sc')>=7],['💡','Curieux',()=>lv(S.xp).l>=3],['🥇','Champion',()=>lv(S.xp).l>=5],['🎓','Expert',()=>lv(S.xp).l>=7],['👑','Maître du quiz',()=>lv(S.xp).l>=10]].map((b,i)=>({id:i,i:b[0],n:b[1],c:b[2]}));
+function chk(){const n=[];B.forEach(b=>{if(!S.bd.includes(b.id)&&b.c()){S.bd.push(b.id);n.push(b)}});return n}
+let cur='home',Q=null,R=null,sel={cat:'cg',d:'e',n:10},lbt='d',tmpAv='';
+const LG=`<svg class=lg viewBox="0 0 100 110"><defs><linearGradient id=gg x2=1 y2=1><stop offset=0 stop-color="#22d3ee"/><stop offset=1 stop-color="#2f6bff"/></linearGradient></defs><path d="M50 6C28 6 14 22 14 40c0 12 6 20 13 28 4 5 6 9 6 14h34c0-5 2-9 6-14 7-8 13-16 13-28C86 22 72 6 50 6z" fill="rgba(47,107,255,.15)" stroke="url(#gg)" stroke-width="5"/><rect x="36" y="88" width="28" height="6" rx="3" fill="#ffc83d"/><rect x="41" y="98" width="18" height="6" rx="3" fill="#ffc83d"/><path d="M50 24v44M50 30c-8-6-18 0-16 8-6 3-5 12 2 13-2 7 8 11 14 6M50 30c8-6 18 0 16 8 6 3 5 12-2 13 2 7-8 11-14 6" fill="none" stroke="#ffc83d" stroke-width="3.5" stroke-linecap="round"/></svg>`;
+/* ---- audio / effets ---- */
+let AC,mi;const ac=()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.state=='suspended'&&AC.resume()}catch(e){}return AC};
+function beep(f,d,v){const c=ac();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.frequency.value=f;o.type='sine';g.gain.value=v;g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d)}
+function tn(ok){if(!S.set.snd)return;if(ok){beep(660,.15,.15);setTimeout(()=>beep(880,.2,.15),110)}else beep(170,.35,.15)}
+function music(){clearInterval(mi);if(S.set.mus){let n=0;const s=[261,329,392,440,392,329];mi=setInterval(()=>beep(s[n++%6],.6,.04),650)}}
+const vib=p=>navigator.vibrate&&navigator.vibrate(p);
+function conf(n){n=n||26;const k=['#ffc83d','#22d3ee','#22c55e','#7c4dff','#ef4444','#2f6bff'];for(let i=0;i<n;i++){const d=document.createElement('div');d.className='cf';d.style.cssText=`left:${Math.random()*100}%;background:${k[i%6]};--x:${(Math.random()-.5)*160}px;animation-delay:${Math.random()*.3}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),2100)}}
+let tt;function toast(t){const e=$('ts');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function fx(t){const d=document.createElement('div');d.className='fx';d.textContent=t;$('app').appendChild(d);setTimeout(()=>d.remove(),1000)}
+function modal(h){$('md').innerHTML='<div class=mb>'+h+'</div>';$('md').classList.add('on')}const closeM=()=>$('md').classList.remove('on');
+/* ---- publicité (emplacements à remplacer par AdMob / AdSense) ---- */
+function adModal(label,cb){window._adcb=cb;modal(`<div class=ad>AD SPACE<small>${label} — remplacer par le SDK AdMob/AdSense</small></div><button class="bt" onclick="closeM();window._adcb&&window._adcb()">Continuer</button>`)}
+function showRewardedAd(onReward){adModal('Publicité récompensée',onReward)}
+function showInterstitialAd(next){adModal('Publicité entre deux parties',next)}
+function startPurchase(plan){modal(`<h3>👑 Premium · ${plan}</h3><p>Le paiement n'est pas encore activé dans cette version. Cette fonction startPurchase() est prête à être reliée à Google Play Billing ou à un autre système de paiement.</p><button class="bt" onclick="closeM()">Compris</button>`)}
+/* ---- navigation ---- */
+function go(p,push){cur=p;if(push!==false)history.pushState({p},'');render()}
+window.addEventListener('popstate',e=>{closeM();go(e.state&&e.state.p||'home',false)});
+const hd=t=>`<div class=hd><button class=ib aria-label="Retour" onclick="history.back()">←</button><h3>${t}</h3></div>`;
+function render(){if(cur=='quiz'&&(!Q||Q.fin))cur='home';if(cur=='result'&&!R)cur='home';
+const m={home,cats,select:sel_,quiz,result,lb,profile,premium,settings};$('v').innerHTML='<div class=pg>'+m[cur]()+'</div>';$('v').scrollTop=0;
+const tabs=[['home','🏠','Accueil'],['cats','🧩','Catégories'],['lb','🏆','Classement'],['profile','👤','Profil']];
+$('nv').style.display=['quiz','select','result'].includes(cur)?'none':'flex';
+$('nv').innerHTML=tabs.map(t=>`<button class="${cur==t[0]?'on':''}" onclick="go('${t[0]}')" aria-label="${t[2]}"><i>${t[1]}</i>${t[2]}</button>`).join('');
+requestAnimationFrame(()=>requestAnimationFrame(()=>{document.querySelectorAll('[data-w]').forEach(e=>e.style.width=e.dataset.w);document.querySelectorAll('[data-d]').forEach(e=>e.style.strokeDasharray=e.dataset.d)}))}
+/* ---- pages ---- */
+function xpb(){const L=lv(S.xp);return`<div class=bar><i data-w="${(S.xp-L.a)/(L.b-L.a)*100}%"></i></div><small>${S.xp-L.a} / ${L.b-L.a} XP</small>`}
+function home(){const dn=S.dd===today();return`<div class=lgw>${LG}<div class=nx>NEXORA</div><div class=qz>QUIZ</div><p class=sub>Apprends • Joue • Progresse</p></div>
+<div class="cd pf" onclick="go('profile')"><div class=av>${S.av}</div><div class=fl><b>${esc(S.name)}</b><span class=lvb>Niveau ${lv(S.xp).l}</span>${xpb()}</div><div class=rt><div>🔥 <b>${sk()}</b> j<small>Série</small></div><div>🏆 <b>${S.best}</b><small>Meilleur score</small></div></div></div>
+<button class="bt y" onclick="startQuick()">▶ JOUER</button>
+<div class=dc onclick="startDaily()" role=button><span>📅</span><div><b>Défi du jour</b><small>${dn?'Terminé ✓ Reviens demain':'Réponds à 10 questions et gagne 100 XP bonus'}</small></div>›</div>
+<div class=sh><b>Catégories populaires</b><a onclick="go('cats')">Voir tout</a></div>
+<div class=pop>${['cg','sn','af','fb'].map(i=>{const c=CM[i];return`<button class=pt onclick="pick('${i}')"><div class=ic style="background:linear-gradient(135deg,${c.a},${c.z})">${c.i}</div><small>${c.n}</small></button>`}).join('')}</div>
+<button class="bt gh" onclick="go('cats')">Voir toutes les catégories</button>
+<div class="cd pm" onclick="go('premium')">👑 NEXORA Premium<small>7 jours gratuits ›</small></div>
+<div class=ad>AD SPACE · Bannière</div>`}
+function cats(){return`<h3 class=ttl>Catégories</h3>`+C.map(c=>{const n=QS.filter(q=>q.c==c.id).length,d=cd(c.id);return`<div class=cr style="--a:${c.a};--z:${c.z}" onclick="pick('${c.id}')" role=button><div class=ic>${c.i}</div><div class=fl><b>${c.n}</b><small>Niveau ${1+(d/3|0)} • ${d}/${n} questions</small><div class="bar s"><i data-w="${d/n*100}%"></i></div></div><span>›</span></div>`}).join('')}
+function pick(id){sel.cat=id;go('select')}
+function startQuick(){sel={cat:'mix',d:'m',n:10};go('select')}
+function sel_(){const c=CM[sel.cat],pool=QS.filter(q=>sel.cat=='mix'||q.c==sel.cat).length,n=Math.min(sel.n,pool);
+return hd(c.n)+`<div class=hero style="--a:${c.a};--z:${c.z}">${c.i}</div><h4>Choisis une difficulté</h4><div class=chs>${[['e','Facile'],['m','Moyen'],['d','Difficile']].map(([k,t])=>`<button class="ch ${sel.d==k?'on':''}" onclick="sel.d='${k}';render()">${t}</button>`).join('')}</div>
+<h4>Nombre de questions</h4><div class=chs>${[10,20,30].map(k=>`<button class="ch ${sel.n==k?'on':''}" onclick="sel.n=${k};render()">${k} questions</button>`).join('')}</div>
+${pool<sel.n?`<small style="margin-top:8px">Seulement ${pool} questions disponibles pour l'instant.</small>`:''}
+<div class=cd style="margin-top:16px">⭐ XP possible : <b>${n*100+50} XP</b><br>🔥 Bonus de série : jouer chaque jour débloque des pièces</div><button class="bt gn" onclick="startQuiz()">COMMENCER LE QUIZ</button>`}
+/* ---- quiz ---- */
+function buildQ(pool){return sh(pool).map(q=>({...q,o:sh(q.o.map((t,k)=>({t,r:k==0})))}))}
+function startQuiz(){const run=()=>{let p=QS.filter(q=>sel.cat=='mix'||q.c==sel.cat);p=sh(p.filter(q=>q.d==sel.d)).concat(sh(p.filter(q=>q.d!=sel.d))).slice(0,sel.n);Q={cat:sel.cat,qs:buildQ(p),i:0,lives:3,ok:0,bad:0,xp:0,ans:[],st:0,hint:0};go('quiz')};
+if(S.played>0&&S.played%3==0)showInterstitialAd(run);else run()}
+function startDaily(){sel={cat:'mix',d:'m',n:10};Q={cat:'mix',daily:1,qs:buildQ(sh(QS).slice(0,10)),i:0,lives:3,ok:0,bad:0,xp:0,ans:[],st:0,hint:0};go('quiz')}
+function quiz(){const q=Q.qs[Q.i],c=CM[q.c];return`<div class=qt><button class=ib onclick="quit()" aria-label="Quitter">✕</button><b>Question ${Q.i+1} / ${Q.qs.length}</b><span class=hp id=hp>❤️ ${Q.lives}</span></div><div class="bar g"><i data-w="${(Q.i+1)/Q.qs.length*100}%"></i></div>
+<div class=chip>${c.i} ${c.n}</div><h2 class=qq>${q.q}</h2><div id=ans>${q.o.map((o,k)=>`<button class=an id=a${k} onclick="ans(${k})"><b>${'ABCD'[k]}</b><span>${o.t}</span></button>`).join('')}</div><div id=fb></div><div class=ft id=ft><button class="bt gh" onclick="skip()">⏭ Passer</button><button class="bt gh" onclick="hint()">💡 Indice (10 🪙)</button></div>`}
+function quit(){modal(`<h3>Quitter le quiz ?</h3><p>Ta progression de cette partie sera perdue (l'XP déjà gagné est conservé).</p><button class="bt gn" onclick="closeM()">Continuer</button><button class="bt gh" onclick="closeM();Q=null;go('home')">Quitter</button>`)}
+function ans(k){if(Q.st)return;Q.st=1;const q=Q.qs[Q.i],o=q.o[k],ok=o.r,r=q.o.find(x=>x.r),g=ok?100:20;Q.xp+=g;S.xp+=g;
+if(ok){Q.ok++;S.cor++;const a=S.cp[q.c]=S.cp[q.c]||[];a.includes(q.id)||a.push(q.id);S.coins+=5;conf();vib(30)}else{Q.bad++;Q.lives--;vib([60,40,60])}
+tn(ok);fx('+'+g+' XP');Q.ans.push({q:q.q,ch:o.t,ok,r:r.t,e:q.e});
+$('a'+k).classList.add(ok?'ok':'ko');if(!ok)$('a'+q.o.indexOf(r)).classList.add('ok');$('ans').classList.add('lk');$('hp').textContent='❤️ '+Q.lives;$('ft').style.display='none';
+const last=Q.i>=Q.qs.length-1||Q.lives<=0;
+$('fb').innerHTML=`<div class="fb ${ok?'g':'r'}"><div class=fh>${ok?'✅ Bonne réponse !':'❌ Mauvaise réponse !'}<span class=xpb>+${g} XP</span></div>${ok?'':`<p>La bonne réponse est : <b>${r.t}</b></p>`}<p class=ex>💡 ${q.e}</p>${Q.lives<=0?'<p>💔 Tu n\'as plus de vies.</p>':''}</div><button class="bt ${ok?'gn':''}" onclick="nxt()">${last?'Voir le résultat':'Question suivante'} →</button>`;
+$('fb').scrollIntoView({behavior:'smooth',block:'end'});save()}
+function nxt(){if(Q.i>=Q.qs.length-1||Q.lives<=0)finish();else{Q.i++;Q.st=0;Q.hint=0;render()}}
+function skip(){if(Q.st)return;const q=Q.qs[Q.i];Q.ans.push({q:q.q,ch:'(passée)',ok:0,r:q.o.find(x=>x.r).t,e:q.e});nxt()}
+function hint(){if(Q.st)return;if(Q.hint)return toast('Un seul indice par question');const q=Q.qs[Q.i];
+if(S.coins>=10)S.coins-=10;else if(Q.lives>1){Q.lives--;$('hp').textContent='❤️ '+Q.lives;toast('−1 ❤️ utilisé pour l\'indice')}
+else return modal(`<h3>Pas assez de pièces</h3><p>Regarde une publicité pour gagner 20 🪙.</p><button class="bt gn" onclick="closeM();showRewardedAd(()=>{S.coins+=20;save();toast('+20 🪙')})">🎬 Regarder une pub</button><button class="bt gh" onclick="closeM()">Fermer</button>`);
+Q.hint=1;sh([0,1,2,3].filter(k=>!q.o[k].r)).slice(0,2).forEach(k=>$('a'+k).classList.add('off'));save()}
+function finish(){const t=today(),y=ymd(Date.now()-864e5);Q.xp+=50;S.xp+=50;let bonus=0;
+if(Q.daily&&S.dd!==t){S.dd=t;bonus=100;Q.xp+=100;S.xp+=100}
+if(S.last!==t){S.streak=S.last===y?S.streak+1:1;S.last=t}
+[[3,30],[7,100],[14,200],[30,500]].forEach(([d,c])=>{if(S.streak>=d&&!S.sr.includes(d)){S.sr.push(d);S.coins+=c}});
+S.played++;if(Q.ok==Q.qs.length)S.perf++;const rec=Q.xp>S.best;if(rec)S.best=Q.xp;
+S.hist.unshift({t:Date.now(),c:CM[Q.cat].n,ok:Q.ok,n:Q.qs.length,xp:Q.xp});S.hist=S.hist.slice(0,50);
+R={ok:Q.ok,n:Q.qs.length,bad:Q.bad,xp:Q.xp,rec,nb:chk(),over:Q.lives<=0,ans:Q.ans,bonus};Q.fin=1;save();conf(60);go('result')}
+function result(){const p=R.ok/R.n,m=p==1?'Parfait !':p>=.7?'Bon travail !':p>=.4?'Pas mal, continue !':'Courage, retente !';
+return`<div class=res>${R.rec?'<div class=rec>🎉 NOUVEAU RECORD !</div>':''}<div class=trophy>🏆</div><h2>Résultat du quiz</h2><div class=ring><svg viewBox="0 0 120 120"><circle cx=60 cy=60 r=52 class=rb></circle><circle cx=60 cy=60 r=52 class=rf data-d="${p*327} 327"></circle></svg><b>${R.ok}/${R.n}</b></div><h3>${m}</h3>${R.over?'<small>💔 Fin de partie : plus de vies</small>':''}
+<div class=g3><div class=cd>⭐<b>+${R.xp}</b><small>XP gagnés</small></div><div class=cd>🔥<b>${sk()} j</b><small>Série</small></div><div class=cd>🏆<b>${S.best}</b><small>Meilleur score</small></div></div>
+<div class=cd style="text-align:left">✅ Bonnes réponses <b style="float:right">${R.ok}</b><br>❌ Mauvaises réponses <b style="float:right">${R.bad}</b>${R.bonus?'<br>📅 Défi du jour <b style="float:right">+100 XP</b>':''}</div>
+${R.nb.length?`<div class=cd>🎖️ Nouveau badge : ${R.nb.map(b=>b.i+' '+b.n).join(', ')}</div>`:''}
+<button class="bt y" onclick="startQuiz()">REJOUER</button><button class="bt gh" onclick="reviewM()">VOIR LES RÉPONSES</button><button class="bt gh" onclick="showRewardedAd(()=>{S.coins+=20;save();toast('+20 🪙 ajoutées')})">🎬 +20 🪙 en regardant une pub</button><button class="bt gh" onclick="go('home')">RETOUR À L'ACCUEIL</button><div class=ad>AD SPACE · Après quiz</div></div>`}
+function reviewM(){modal(`<h3>Tes réponses</h3>`+R.ans.map(a=>`<div class=rv><b>${a.ok?'✅':'❌'} ${a.q}</b>Ta réponse : ${a.ch}<br>Bonne réponse : ${a.r}<br><small>💡 ${a.e}</small></div>`).join('')+`<button class="bt" onclick="closeM()">Fermer</button>`)}
+/* ---- classement ---- */
+function lb(){const k=lbt,sc={d:.1,w:.45,m:1},me=S.hist.filter(h=>k=='d'?ymd(h.t)==today():Date.now()-h.t<(k=='w'?7:30)*864e5).reduce((a,h)=>a+h.xp,0);
+const L=FK.map(f=>({n:f[0],a:f[2],s:Math.round(f[1]*sc[k])})).concat({n:S.name,a:S.av,s:me,me:1}).sort((a,b)=>b.s-a.s),f=n=>n.toLocaleString('fr-FR');
+const pd=i=>{const u=L[i];return`<div class="p${i+1} ${u.me?'me':''}"><div class=av>${u.a}</div><b>${esc(u.n)}</b><small>${i==0?'🥇':i==1?'🥈':'🥉'} ${f(u.s)}</small></div>`};
+return`<h3 class=ttl>Classement</h3><div class=tabs>${[['d','Quotidien'],['w','Hebdomadaire'],['m','Mensuel']].map(([a,b])=>`<button class="ch ${k==a?'on':''}" onclick="lbt='${a}';render()">${b}</button>`).join('')}</div>
+<div class=pod>${pd(1)}${pd(0)}${pd(2)}</div>${L.slice(3).map((u,i)=>`<div class="row ${u.me?'me':''}"><span class=n>${i+4}</span><div class=av>${u.a}</div><span>${esc(u.n)}${u.me?' (toi)':''}</span><small style="color:inherit">Niv. ${lv(u.s*3).l}</small><b>${f(u.s)}</b></div>`).join('')}<small style="text-align:center;margin-top:8px">Classement de démonstration (local)</small>`}
+/* ---- profil ---- */
+function profile(){return`<div class=pr><div class="av big">${S.av}</div><div class=fl><h2>${esc(S.name)}<button class=ib aria-label="Modifier" onclick="editP()">✏️</button></h2><span class=lvb>Niveau ${lv(S.xp).l}</span>${xpb()}</div></div>
+<div class=g4><div class=cd><b>${S.played}</b><small>Quiz joués</small></div><div class=cd><b>${S.best}</b><small>Meilleur score</small></div><div class=cd><b>${sk()}</b><small>Série actuelle</small></div><div class=cd><b>${S.xp}</b><small>XP total</small></div></div>
+<div class=sh style="margin-top:14px"><b>Badges</b><small>${S.bd.length}/${B.length} • 🪙 ${S.coins}</small></div><div class=bgs>${B.map(b=>`<div class="bg ${S.bd.includes(b.id)?'':'lc'}"><i>${S.bd.includes(b.id)?b.i:'🔒'}</i>${b.n}</div>`).join('')}</div>
+<div class=sh><b>Récompenses de série</b></div><div class=sr>${[[3,30],[7,100],[14,200],[30,500]].map(([d,c])=>`<div class="${S.sr.includes(d)?'dn':''}">🔥 ${d} j<br>+${c} 🪙</div>`).join('')}</div>
+<button class=ml onclick="histM()">📜<span>Historique des quiz</span>›</button><button class=ml onclick="go('settings')">⚙️<span>Paramètres</span>›</button><button class=ml onclick="helpM()">❓<span>Aide</span>›</button><button class=ml onclick="aboutM()">ℹ️<span>À propos</span>›</button><button class=ml onclick="go('premium')">👑<span>NEXORA Premium</span>›</button>`}
+function histM(){modal(`<h3>Historique des quiz</h3>`+(S.hist.length?S.hist.slice(0,25).map(h=>`<div class=rv><b>${h.c} — ${h.ok}/${h.n}</b><small>${new Date(h.t).toLocaleDateString('fr-FR')} • +${h.xp} XP</small></div>`).join(''):'<p>Aucun quiz joué pour le moment. Lance ta première partie !</p>')+`<button class="bt" onclick="closeM()">Fermer</button>`)}
+function editP(){tmpAv=S.av;modal(`<h3>Modifier le profil</h3><input id=nm maxlength=14 value="${esc(S.name)}" aria-label="Pseudo"><div class=avs>${AVS.map(a=>`<button class="${a==tmpAv?'on':''}" onclick="tmpAv='${a}';document.querySelectorAll('.avs button').forEach(b=>b.classList.toggle('on',b.textContent=='${a}'))">${a}</button>`).join('')}</div><button class="bt gn" onclick="saveP()">Enregistrer</button>`)}
+function saveP(){S.name=($('nm').value.trim()||'Joueur').slice(0,14);S.av=tmpAv;save();closeM();render();toast('Profil enregistré')}
+function helpM(){modal(`<h3>Aide</h3><p>• Choisis une catégorie, une difficulté et un nombre de questions.</p><p>• Bonne réponse : +100 XP. Mauvaise : +20 XP et −1 ❤️. Quiz terminé : +50 XP.</p><p>• Indice : retire 2 mauvaises réponses (10 🪙 ou 1 ❤️).</p><p>• Joue chaque jour pour prolonger ta série 🔥 et gagner des pièces.</p><button class="bt" onclick="closeM()">Fermer</button>`)}
+function aboutM(){modal(`<h3>À propos</h3><p>NEXORA QUIZ · version 1.0.0<br>Plus qu'un jeu, c'est une aventure de connaissances !</p><p>Toutes tes données sont enregistrées uniquement sur cet appareil.</p><button class="bt" onclick="closeM()">Fermer</button>`)}
+/* ---- premium ---- */
+function premium(){return hd('Premium')+`<div class=prm><div style="font-size:54px">👑</div><div class=nx style="font-size:30px">NEXORA</div><div class=qz style="font-size:22px">QUIZ</div><h3 style="margin:8px 0 14px">Version Premium</h3></div>
+<div class=cd><ul class=vl><li>Sans publicité</li><li>Toutes les catégories</li><li>Vies illimitées</li><li>Bonus XP</li><li>Badges exclusifs</li><li>Défis Premium</li></ul></div>
+<div class=pl><div onclick="startPurchase('7 jours')" role=button style="border-color:var(--ye)">7 jours<small>Gratuit</small></div><div onclick="startPurchase('1 mois')" role=button style="border-color:var(--vi)">1 mois<small>2 500 FCFA</small></div></div>
+<button class="bt y" onclick="startPurchase('Premium')">👑 Devenir Premium</button><small style="text-align:center">Tu peux aussi regarder une pub pour gagner des pièces.</small><button class="bt gh" onclick="showRewardedAd(()=>{S.coins+=20;save();toast('+20 🪙 ajoutées')})">🎬 Regarder une pub (+20 🪙)</button>`}
+/* ---- paramètres ---- */
+const tg=(k,el)=>{S.set[k]=S.set[k]?0:1;el.classList.toggle('on');if(k=='not'&&S.set.not&&'Notification'in window)Notification.requestPermission();apply();save()};
+function apply(){document.body.classList.toggle('lt',!S.set.dark);music()}
+const trow=(i,t,k)=>`<div class=ml>${i}<span>${t}</span><div class="sw ${S.set[k]?'on':''}" role=switch aria-label="${t}" onclick="tg('${k}',this)"></div></div>`;
+function settings(){return hd('Paramètres')+`<h4>Compte</h4><button class=ml onclick="editP()">✏️<span>Modifier le pseudo et l'avatar</span>›</button>${trow('🔔','Notifications','not')}<h4>Son et affichage</h4>${trow('🔊','Son','snd')}${trow('🎵','Musique','mus')}${trow('🌙','Mode sombre','dark')}<div class=ml>🌐<span>Langue</span><em>🇫🇷 Français</em></div>
+<h4>Aide</h4><button class=ml onclick="helpM()">❓<span>Centre d'aide</span>›</button><button class=ml onclick="modal('<h3>Nous contacter</h3><p>Écris-nous à <b>${CONTACT_EMAIL}</b></p><a class=bt href=mailto:${CONTACT_EMAIL} style=text-align:center;text-decoration:none;line-height:54px>Envoyer un e-mail</a><button class=&quot;bt gh&quot; onclick=closeM()>Fermer</button>')">✉️<span>Nous contacter</span>›</button><button class=ml onclick="aboutM()">ℹ️<span>À propos</span><em>v1.0.0</em></button>
+<button class="bt gh" style="border-color:var(--rd);color:var(--rd);margin-top:18px" onclick="resetM()">Réinitialiser les données</button>`}
+function resetM(){modal(`<h3>Réinitialiser les données ?</h3><p>Ton pseudo, ton XP, tes badges et ta progression seront supprimés. Cette action est définitive.</p><button class="bt" style="background:var(--rd)" onclick="doReset()">Oui, tout supprimer</button><button class="bt gh" onclick="closeM()">Annuler</button>`)}
+function doReset(){try{localStorage.removeItem('nexora_quiz')}catch(e){}S=DEF();Q=null;R=null;closeM();apply();go('home');toast('Données réinitialisées')}
+/* ---- démarrage ---- */
+document.addEventListener('click',()=>{if(S.set.mus&&!mi)music()},{once:true});
+apply();history.replaceState({p:'home'},'');render();
+</script>
+</body>
+</html>
